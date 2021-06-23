@@ -3,13 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "frontend": "vue-cli-service serve",
+    "backend": "npm start --prefix server",
+    "lint": "vue-cli-service lint",
+    "serve": "npm-run-all -p -r frontend backend"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
+    "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11",
+    "devextreme": "21.1.3",
+    "devextreme-aspnet-data": "^2.8.5",
+    "devextreme-aspnet-data-nojquery": "^2.8.5",
+    "devextreme-vue": "21.1.3",
+    "npm-run-all": "^4.1.5",
+    "vue": "^2.6.14",
+    "vue-axios": "^3.2.4",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
   },
@@ -21,9 +31,12 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "babel-eslint": "^10.1.0",
+    "devextreme-cldr-data": "^1.0.3",
+    "devextreme-themebuilder": "^21.1.3",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
+    "globalize": "^1.6.0",
     "prettier": "^2.2.1",
     "vue-template-compiler": "^2.6.11"
   }
