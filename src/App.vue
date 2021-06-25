@@ -4,8 +4,9 @@
       <b-navbar>
         <b-navbar-brand href="/">SuperHero Finder</b-navbar-brand>
           <b-navbar-nav class="ml-auto">
-            <b-nav-item to="/">All Universe</b-nav-item>
-            <!-- <b-nav-item :to="{ path: '/marvelheroes', query: { 'publisher': 'Marvel Comics' }}">Marvel Comics</b-nav-item> -->
+            <b-nav-item @click="() => $store.dispatch('hero/fetchHeroPersons')">All Universe</b-nav-item>
+            <b-nav-item @click="() => $store.dispatch('hero/fetchItemsByPublisher', 'Marvel Comics')">Marvel Comics</b-nav-item>
+            <b-nav-item @click="() => $store.dispatch('hero/fetchItemsByPublisher', 'DC Comics')">DC Comics</b-nav-item>
           </b-navbar-nav>
       </b-navbar>
     </div>
