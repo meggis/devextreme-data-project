@@ -313,16 +313,25 @@ app.get('/api/items', (req, res, next) => {
     }
   ]
 
-
   const id = parseInt(req.query.id) || null
+  const publisher = req.query.publisher || null
 
   if (id) {
-    const item = items.find(item => item.id === id)
+    const item = items.find((item) => item.id === id)
     if (!item) {
       return res.json({ error: { message: 'There is no item with specific ID' } })
     }
 
     return res.json({ ...item })
+  }
+
+  if (publisher) {
+    const item = items.filter(item => item.publisher === publisher)
+    if (!item) {
+      return res.json({ error: { message: 'There are no items' } })
+    }
+
+    return res.json(item)
   }
 
   return res.json({ items });

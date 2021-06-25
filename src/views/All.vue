@@ -82,8 +82,6 @@ const appearanceTitles = {
   "hair-color": "Hair color:",
 };
 
-// const items = data.data.appearance;
-
 export default {
   name: "MarvelHeroes",
   components: {
@@ -99,13 +97,17 @@ export default {
       response: null,
       dataSource: [],
       appearanceTitles: appearanceTitles,
-      // items: items
     };
   },
   computed: {
     ...mapState("hero", ["heroPersons"]),
+
+    // getPublisher () {
+    //   return this.$route.query.publisher
+    // }
   },
   async mounted() {
+    // await this.$store.dispatch("hero/fetchItemsByPublisher", this.getPublisher);
     await this.$store.dispatch("hero/fetchHeroPersons");
   },
   methods: {

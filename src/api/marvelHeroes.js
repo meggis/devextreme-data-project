@@ -8,6 +8,10 @@ export default ({ axios }) => {
       const { data } = await axios.get(`/api/items?id=${id}`);
       return data;
     },
+    async getItemsByPublisher(publisher) {
+      const { data } = await axios.get(`/api/items?publisher=${publisher}`);
+      return data;
+    },
   };
 };
 

@@ -23,6 +23,13 @@ export default ({ heroApi }) => {
         commit("setHeroLoading", false);
       }
     },
+    async fetchItemsByPublisher({ commit }, publisher) {
+      try {
+        commit("setHeroPersons", await heroApi.getItemsByPublisher(publisher));
+      } finally {
+        commit("setHeroLoading", false);
+      }
+    },
   };
 
   const mutations = {};

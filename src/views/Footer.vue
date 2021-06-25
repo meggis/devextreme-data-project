@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="text-center footer">
     <b-col class="footer-class">
       © 2021 Copyright:
       <a href="https://github.com/meggis"> Magdalena Siekańska </a>
@@ -9,7 +9,7 @@
 
 <style scoped>
 .footer {
-  position: absolute;
+  position: sticky;
   bottom: 0;
   width: 100%;
   height: 60px;
@@ -19,7 +19,6 @@
   background-color: #343a40;
   color: white;
   padding: 20px 0px 20px 0px;
-  bottom: 0;
 }
 
 a {

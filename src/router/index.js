@@ -1,23 +1,26 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    path: "/marvelheroes",
-    name: "MarvelHeroes",
+    name: "All",
     component: () =>
       import(
-        /* webpackChunkName: "MarvelHeroes" */ "../views/MarvelHeroes.vue"
+        /* webpackChunkName: "MarvelHeroes" */ "../views/All.vue"
       ),
   },
+  // {
+  //   path: "/marvelheroes",
+  //   name: "MarvelHeroes",
+  //   component: () =>
+  //     import(
+  //       /* webpackChunkName: "MarvelHeroes" */ "../views/MarvelHeroes.vue"
+  //     ),
+  // },
   {
     path: "/herocard/:id",
     name: "HeroCard",
