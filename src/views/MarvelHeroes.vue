@@ -1,48 +1,88 @@
 <template>
   <b-container class="my-5">
-    <b-row>
-      <b-col>
-        <div class="vertical-align">
-          <DxDataGrid
-            :data-source="heroPersons"
-            :show-borders="true"
-            :remote-operations="true"
-          >
-            <DxColumn
-              :allow-sorting="false"
-              data-field="image"
-              cell-template="cellTemplate"
-            />
-            <div slot="cellTemplate" slot-scope="{ data }">
-              <img :src="data.value" class="hero-picture" />
-            </div>
-            <DxColumn dataField="heroName" caption="Hero name" />
-            <DxColumn dataField="realName" caption="Real name" />
-            <DxColumn dataField="publisher" caption="Publisher" />
+    <div class="vertical-align">
+      <DxDataGrid
+        :data-source="heroPersons"
+        :show-borders="true"
+        :remote-operations="true"
+        :column-min-width="100"
+      >
+        <DxColumn
+          :allow-sorting="false"
+          data-field="image"
+          cell-template="cellTemplate"
+        />
+        <div slot="cellTemplate" slot-scope="{ data }">
+          <img :src="data.value" class="hero-picture" />
+        </div>
+        <DxColumn dataField="heroName" caption="Hero name" />
+        <DxColumn dataField="realName" caption="Real name" />
+        <DxColumn dataField="publisher" caption="Publisher" />
 
-            <DxMasterDetail :enabled="true" template="masterDetailTemplate" />
+        <DxMasterDetail :enabled="true" template="masterDetailTemplate" />
 
-            <div slot="masterDetailTemplate" slot-scope="{ data }">
-              <DxChart id="chart" :data-source="getChartObject(data.data.powerStats)">
+        <div slot="masterDetailTemplate" slot-scope="{ data }">
+          <b-row align-v="center">
+            <b-col>
+              <div v-for="(value, key) in data.data.appearance" :key="key">
+                <b-row class="text-center">
+                  <b-col>
+                    {{ appearanceTitles[key] }}
+                  </b-col>
+                  <b-col v-if="Array.isArray(value) && value.length">
+                    {{ `${value[1]} (${value[0]})` }}
+                  </b-col>
+                  <b-col v-else-if="key === 'eye-color'">
+                    <div>
+                      <b-badge
+                        :style="{ backgroundColor: value.toLowerCase() }"
+                        >{{ value.toLowerCase() }}</b-badge
+                      >
+                    </div>
+                  </b-col>
+                  <b-col v-else>
+                    {{ value }}
+                  </b-col>
+                </b-row>
+              </div>
+            </b-col>
+            <b-col>
+              <DxChart
+                id="chart"
+                :data-source="getChartObject(data.data.powerStats)"
+              >
                 <DxSeries
                   argument-field="powerStatName"
                   value-field="powerStatValue"
                   type="bar"
-                  color="#ffaa66"
+                  color="#c0c0c0"
+                  :height="200"
                 />
+                <DxSize :height="250" :width="600" />
               </DxChart>
-            </div>
-          </DxDataGrid>
+            </b-col>
+          </b-row>
         </div>
-      </b-col>
-    </b-row>
+      </DxDataGrid>
+    </div>
   </b-container>
 </template>
 
 <script>
 import { DxDataGrid, DxColumn, DxMasterDetail } from "devextreme-vue/data-grid";
-import { DxChart, DxSeries } from "devextreme-vue/chart";
+import { DxChart, DxSeries, DxSize } from "devextreme-vue/chart";
 import { mapState } from "vuex";
+
+const appearanceTitles = {
+  gender: "Gender:",
+  race: "Hero race:",
+  height: "Height:",
+  weight: "Weight:",
+  "eye-color": "Eye color:",
+  "hair-color": "Hair color:",
+};
+
+// const items = data.data.appearance;
 
 export default {
   name: "MarvelHeroes",
@@ -50,13 +90,16 @@ export default {
     DxDataGrid,
     DxColumn,
     DxMasterDetail,
-    DxChart, 
-    DxSeries
+    DxChart,
+    DxSeries,
+    DxSize,
   },
   data() {
     return {
       response: null,
       dataSource: [],
+      appearanceTitles: appearanceTitles,
+      // items: items
     };
   },
   computed: {
@@ -97,7 +140,8 @@ export default {
     rgba(0, 0, 0, 0.32) 0px 2px 10px 0px;
 }
 
-.dx-datagrid td {
+::v-deep .dx-datagrid-content .dx-datagrid-table .dx-row > td,
+.dx-datagrid-content .dx-datagrid-table .dx-row > tr > td {
   vertical-align: middle;
 }
 </style>
