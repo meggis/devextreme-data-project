@@ -1,15 +1,17 @@
 <template>
   <div>
-    <b-container class="border-container mt-5 py-3">
-      <b-row>
-        <b-col>
-          <h1>Find your SuperHero</h1>
-          <span>
-            From list below pick hero name to fetch some person informations.
-          </span>
-        </b-col>
-      </b-row>
-    </b-container>
+    <div id="top-bg-color">
+      <b-container class="py-5">
+        <b-row>
+          <b-col>
+            <h1>Find your SuperHero</h1>
+            <h5>
+              From list below pick hero name to fetch some person informations.
+            </h5>
+          </b-col>
+        </b-row>
+      </b-container>
+    </div>
     <b-container class="my-5">
       <div class="vertical-align">
         <DxDataGrid
@@ -159,8 +161,7 @@ export default {
   vertical-align: middle;
 }
 
-.border-container {
-  border: 1px solid rgb(202, 202, 202);
-  border-radius: 10px;
+#top-bg-color {
+  background-color: rgb(243, 243, 243);
 }
 </style>

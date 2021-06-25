@@ -1,16 +1,29 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <b-navbar>
+      <b-navbar id="nav">
         <b-navbar-brand href="/">SuperHero Finder</b-navbar-brand>
-          <b-navbar-nav class="ml-auto">
-            <b-nav-item @click="() => $store.dispatch('hero/fetchHeroPersons')">All Universe</b-nav-item>
-            <b-nav-item @click="() => $store.dispatch('hero/fetchItemsByPublisher', 'Marvel Comics')">Marvel Comics</b-nav-item>
-            <b-nav-item @click="() => $store.dispatch('hero/fetchItemsByPublisher', 'DC Comics')">DC Comics</b-nav-item>
-          </b-navbar-nav>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item @click="() => $store.dispatch('hero/fetchHeroPersons')"
+            >All Universe</b-nav-item
+          >
+          <b-nav-item
+            @click="
+              () =>
+                $store.dispatch('hero/fetchItemsByPublisher', 'Marvel Comics')
+            "
+            >Marvel Comics</b-nav-item
+          >
+          <b-nav-item
+            @click="
+              () => $store.dispatch('hero/fetchItemsByPublisher', 'DC Comics')
+            "
+            >DC Comics</b-nav-item
+          >
+        </b-navbar-nav>
       </b-navbar>
+    <div class="content">
+      <router-view />
     </div>
-    <router-view />
     <Footer />
   </div>
 </template>
@@ -36,35 +49,32 @@ export default {
   padding: 10px;
   text-align: right;
   background-color: #2a3138;
-  position: relative
+  position: relative;
 }
 
 #nav {
-  .navbar-brand, a {
+  .navbar-brand,
+  a {
     font-weight: bold;
     color: #ff7300;
-    &:hover{
-        text-decoration: none;
-  color: #ff730080;
-
-  }
+    &:hover {
+      text-decoration: none;
+      color: #ff730080;
+    }
   }
 }
-
 
 a.nav-link:hover {
   text-decoration: none;
   color: #ff730080;
 }
 
-
 html {
   height: 100%;
 }
 
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+.content {
+  min-height: calc(100vh - 60px);
+  padding-bottom: 60px;
 }
 </style>
