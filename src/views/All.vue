@@ -1,71 +1,83 @@
 <template>
-  <b-container class="my-5">
-    <div class="vertical-align">
-      <DxDataGrid
-        :data-source="heroPersons"
-        :show-borders="true"
-        :remote-operations="true"
-        :column-min-width="100"
-      >
-        <DxColumn
-          :allow-sorting="false"
-          data-field="image"
-          cell-template="cellTemplate"
-        />
-        <div slot="cellTemplate" slot-scope="{ data }">
-          <img :src="data.value" class="hero-picture" />
-        </div>
-        <DxColumn dataField="heroName" caption="Hero name" />
-        <DxColumn dataField="realName" caption="Real name" />
-        <DxColumn dataField="publisher" caption="Publisher" />
+  <div>
+    <b-container class="border-container mt-5 py-3">
+      <b-row>
+        <b-col>
+          <h1>Find your SuperHero</h1>
+          <span>
+            From list below pick hero name to fetch some person informations.
+          </span>
+        </b-col>
+      </b-row>
+    </b-container>
+    <b-container class="my-5">
+      <div class="vertical-align">
+        <DxDataGrid
+          :data-source="heroPersons"
+          :show-borders="true"
+          :remote-operations="true"
+          :column-min-width="100"
+        >
+          <DxColumn
+            :allow-sorting="false"
+            data-field="image"
+            cell-template="cellTemplate"
+          />
+          <div slot="cellTemplate" slot-scope="{ data }">
+            <img :src="data.value" class="hero-picture" />
+          </div>
+          <DxColumn dataField="heroName" caption="Hero name" />
+          <DxColumn dataField="realName" caption="Real name" />
+          <DxColumn dataField="publisher" caption="Publisher" />
 
-        <DxMasterDetail :enabled="true" template="masterDetailTemplate" />
+          <DxMasterDetail :enabled="true" template="masterDetailTemplate" />
 
-        <div slot="masterDetailTemplate" slot-scope="{ data }">
-          <b-row align-v="center">
-            <b-col>
-              <div v-for="(value, key) in data.data.appearance" :key="key">
-                <b-row class="text-center">
-                  <b-col>
-                    {{ appearanceTitles[key] }}
-                  </b-col>
-                  <b-col v-if="Array.isArray(value) && value.length">
-                    {{ `${value[1]} (${value[0]})` }}
-                  </b-col>
-                  <b-col v-else-if="key === 'eye-color'">
-                    <div>
-                      <b-badge
-                        :style="{ backgroundColor: value.toLowerCase() }"
-                        >{{ value.toLowerCase() }}</b-badge
-                      >
-                    </div>
-                  </b-col>
-                  <b-col v-else>
-                    {{ value }}
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-            <b-col>
-              <DxChart
-                id="chart"
-                :data-source="getChartObject(data.data.powerStats)"
-              >
-                <DxSeries
-                  argument-field="powerStatName"
-                  value-field="powerStatValue"
-                  type="bar"
-                  color="#c0c0c0"
-                  :height="200"
-                />
-                <DxSize :height="250" :width="600" />
-              </DxChart>
-            </b-col>
-          </b-row>
-        </div>
-      </DxDataGrid>
-    </div>
-  </b-container>
+          <div slot="masterDetailTemplate" slot-scope="{ data }">
+            <b-row align-v="center">
+              <b-col>
+                <div v-for="(value, key) in data.data.appearance" :key="key">
+                  <b-row class="text-center">
+                    <b-col>
+                      {{ appearanceTitles[key] }}
+                    </b-col>
+                    <b-col v-if="Array.isArray(value) && value.length">
+                      {{ `${value[1]} (${value[0]})` }}
+                    </b-col>
+                    <b-col v-else-if="key === 'eye-color'">
+                      <div>
+                        <b-badge
+                          :style="{ backgroundColor: value.toLowerCase() }"
+                          >{{ value.toLowerCase() }}</b-badge
+                        >
+                      </div>
+                    </b-col>
+                    <b-col v-else>
+                      {{ value }}
+                    </b-col>
+                  </b-row>
+                </div>
+              </b-col>
+              <b-col>
+                <DxChart
+                  id="chart"
+                  :data-source="getChartObject(data.data.powerStats)"
+                >
+                  <DxSeries
+                    argument-field="powerStatName"
+                    value-field="powerStatValue"
+                    type="bar"
+                    color="#c0c0c0"
+                    :height="200"
+                  />
+                  <DxSize :height="250" :width="600" />
+                </DxChart>
+              </b-col>
+            </b-row>
+          </div>
+        </DxDataGrid>
+      </div>
+    </b-container>
+  </div>
 </template>
 
 <script>
@@ -145,5 +157,10 @@ export default {
 ::v-deep .dx-datagrid-content .dx-datagrid-table .dx-row > td,
 .dx-datagrid-content .dx-datagrid-table .dx-row > tr > td {
   vertical-align: middle;
+}
+
+.border-container {
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 10px;
 }
 </style>

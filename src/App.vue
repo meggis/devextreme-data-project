@@ -42,12 +42,17 @@ export default {
 #nav {
   .navbar-brand, a {
     font-weight: bold;
-    color: #ff7300
+    color: #ff7300;
+    &:hover{
+        text-decoration: none;
+  color: #ff730080;
+
+  }
   }
 }
 
 
-a.nav-link {
+a.nav-link:hover {
   text-decoration: none;
   color: #ff730080;
 }
