@@ -13,9 +13,6 @@
         />
         <DxColumn data-field="heroName" caption="Hero name" />
         <DxColumn data-field="publisher" />
-        <DxColumn data-field="publisher" />
-        <DxColumn data-field="publisher" />
-        <DxColumn data-field="publisher" />
         <template #cellTemplate="{ data }">
           <img :src="data.value" />
         </template>
