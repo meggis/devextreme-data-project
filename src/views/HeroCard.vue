@@ -1,3 +1,8 @@
+<!--
+This component is not ready yet. 
+//-->
+
+
 <template>
   <b-container>
     <div v-if="heroPerson">
@@ -52,3 +57,4 @@ export default {
   },
 };
 </script>
+
