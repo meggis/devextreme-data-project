@@ -10,9 +10,6 @@
             </h5>
           </b-col>
         </b-row>
-        <ul v-for="set in sets" :key="set.id">
-          <li v-for="n in even(set)" :key="n.id">{{ n }}</li>
-        </ul>
       </b-container>
     </div>
     <b-container class="my-5">
@@ -114,10 +111,6 @@ export default {
       response: null,
       dataSource: [],
       appearanceTitles: appearanceTitles,
-      sets: [
-        [1, 2, 3, 4, 5],
-        [6, 7, 8, 9, 10],
-      ],
     };
   },
   computed: {
@@ -148,11 +141,6 @@ export default {
         });
       }
       return cartData;
-    },
-    even: function (numbers) {
-      return numbers.filter(function (number) {
-        return number % 2 === 0;
-      });
     },
   },
 };
